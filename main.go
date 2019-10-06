@@ -17,7 +17,7 @@ func main() {
 	defer s.GracefulStop()
 
 	pb.RegisterGreeterServer(s, &server{})
-	serviceManager.Register("hello_service", "127.0.0.1", 42222, s, 5)
+	serviceManager.Register("hello_service", "127.0.0.1", "127.0.0.1", 42222, s, 5)
 }
 
 type server struct{}

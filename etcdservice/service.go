@@ -26,9 +26,10 @@ func NewServiceManager(etcdAddr string) *ServiceManager {
 	return s
 }
 
-func (s *ServiceManager) Register(serviceName string, ip string, port int, srv *grpc.Server, ttl int64) error {
-	serviceAddr := fmt.Sprintf("%s:%d", ip, port)
-	listener, err := net.Listen("tcp", serviceAddr)
+func (s *ServiceManager) Register(serviceName string, listenIp string, serviceIp string, port int, srv *grpc.Server, ttl int64) error {
+	listenAddr := fmt.Sprintf("%s:%d", listenIp, port)
+	serviceAddr := fmt.Sprintf("%s:%d", serviceIp, port)
+	listener, err := net.Listen("tcp", listenAddr)
 	if err != nil {
 		log.Fatalln("Failed to listen, err: %s", err)
 	} else {
